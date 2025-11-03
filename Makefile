@@ -1,15 +1,15 @@
 .PHONY: help build run test docker-build docker-run docker-stop clean swagger env-example env-check
 
-help: ## Показать помощь
+help: 
 	@echo "Доступные команды:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-env-example: ## Создать .env.example файл (шаблон)
+env-example:
 	@echo "Создание .env.example..."
 	@echo "DB_PASSWORD=your_secure_password_here" > .env.example
 	@echo "Файл .env.example создан!"
 
-env-check: ## Проверить наличие .env файла
+env-check: 
 	@if [ ! -f .env ]; then \
 		echo "⚠️  Файл .env не найден!"; \
 		echo "Создайте файл .env с содержимым:"; \
