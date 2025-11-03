@@ -22,7 +22,7 @@ RUN apk --no-cache add ca-certificates tzdata
 WORKDIR /root/
 
 COPY --from=builder /app/logging_api .
-
+COPY --from=builder /app/docs ./docs/
 COPY configs/config.json ./configs/
 
 RUN addgroup -g 1000 appuser && \
