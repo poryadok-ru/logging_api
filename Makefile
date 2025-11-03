@@ -1,4 +1,4 @@
-.PHONY: help build run test docker-build docker-run docker-stop clean swagger env-example env-check
+.PHONY: help build run test docker-build docker-run docker-stop docker-logs clean swagger env-example env-check start stop deploy
 
 help: 
 	@echo "Доступные команды:"
@@ -42,21 +42,26 @@ docker-build: ## Собрать Docker образ
 	@echo "Сборка Docker образа..."
 	docker build -t logging_api:latest .
 
-docker-run: env-check ## Запустить через Docker Compose
-	@echo "Запуск через Docker Compose..."
-	docker-compose up -d
+docker-run: env-check ## Запустить контейнер напрямую (без compose)
+	@echo "Запуск контейнера..."
+	@./start.sh
 
-docker-stop: ## Остановить Docker контейнеры
-	@echo "Остановка контейнеров..."
-	docker-compose down
+docker-stop: ## Остановить контейнер
+	@echo "Остановка контейнера..."
+	@./stop.sh
 
 docker-logs: ## Показать логи контейнера
-	docker-compose logs -f logging_api
+	@docker logs -f logging_api
+
+start: docker-run ## Алиас для docker-run
+
+stop: docker-stop ## Алиас для docker-stop
 
 clean: ## Очистить build артефакты
 	@echo "Очистка..."
 	rm -f logging_api
-	docker-compose down -v
+	docker stop logging_api 2>/dev/null || true
+	docker rm logging_api 2>/dev/null || true
 	docker rmi logging_api:latest 2>/dev/null || true
 
 deploy: env-check docker-build docker-run ## Полный деплой (проверка .env, сборка, запуск) 
@@ -71,5 +76,5 @@ prod-build: ## Собрать для продакшена
 
 prod-deploy: prod-build
 	@echo "Деплой на продакшен..."
-	docker-compose -f docker-compose.prod.yml up -d
+	@./start.sh
 
