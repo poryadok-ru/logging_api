@@ -1,8 +1,26 @@
-.PHONY: help build run test docker-build docker-run docker-stop clean swagger
+.PHONY: help build run test docker-build docker-run docker-stop clean swagger env-example env-check
 
 help: ## Показать помощь
 	@echo "Доступные команды:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+
+env-example: ## Создать .env.example файл (шаблон)
+	@echo "Создание .env.example..."
+	@echo "DB_PASSWORD=your_secure_password_here" > .env.example
+	@echo "Файл .env.example создан!"
+
+env-check: ## Проверить наличие .env файла
+	@if [ ! -f .env ]; then \
+		echo "⚠️  Файл .env не найден!"; \
+		echo "Создайте файл .env с содержимым:"; \
+		echo ""; \
+		echo "DB_PASSWORD=your_secure_password_here"; \
+		echo ""; \
+		echo "Или запустите: cp .env.example .env и отредактируйте"; \
+		exit 1; \
+	else \
+		echo "✓ Файл .env найден"; \
+	fi
 
 build: ## Скомпилировать приложение
 	@echo "Компиляция..."
@@ -24,7 +42,7 @@ docker-build: ## Собрать Docker образ
 	@echo "Сборка Docker образа..."
 	docker build -t logging_api:latest .
 
-docker-run: ## Запустить через Docker Compose
+docker-run: env-check ## Запустить через Docker Compose
 	@echo "Запуск через Docker Compose..."
 	docker-compose up -d
 
@@ -41,7 +59,7 @@ clean: ## Очистить build артефакты
 	docker-compose down -v
 	docker rmi logging_api:latest 2>/dev/null || true
 
-deploy: docker-build docker-run 
+deploy: env-check docker-build docker-run ## Полный деплой (проверка .env, сборка, запуск) 
 
 lint:
 	@echo "Запуск линтера..."
