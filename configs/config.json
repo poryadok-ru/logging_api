@@ -1,10 +1,10 @@
 {
     "server": {
         "port": 8080,
-        "host": "109.73.196.28"
+        "host": "0.0.0.0"
     },
     "database": {
-        "host": "localhost",
+        "host": "109.73.196.28",
         "port": 5432,
         "user": "postgres",
         "dbname": "logs",
