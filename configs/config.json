@@ -4,10 +4,10 @@
         "host": "0.0.0.0"
     },
     "database": {
-        "host": "109.73.196.28",
+        "host": "localhost",
         "port": 5432,
         "user": "postgres",
-        "dbname": "logs",
+        "dbname": "postgres",
         "sslmode": "disable"
     }
 }
