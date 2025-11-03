@@ -1593,9 +1593,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "api.alexmayka.ru",
 	BasePath:         "/",
-	Schemes:          []string{},
+	Schemes:          []string{"https"},
 	Title:            "Logging API",
 	Description:      "API для управления токенами и логами ботов",
 	InfoInstanceName: "swagger",

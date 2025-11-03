@@ -397,7 +397,7 @@ definitions:
         example: true
         type: boolean
     type: object
-host: localhost:8080
+host: api.alexmayka.ru
 info:
   contact: {}
   description: API для управления токенами и логами ботов
@@ -1098,6 +1098,8 @@ paths:
       summary: Деактивировать токен
       tags:
       - tokens
+schemes:
+- https
 securityDefinitions:
   BearerAuth:
     description: 'Введите токен в формате: Bearer {token}'
