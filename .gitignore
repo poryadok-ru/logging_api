@@ -1,0 +1,14 @@
+.env
+
+.idea
+.vscode
+.DS_Store
+
+logging_api
+*.exe
+
+*.log
+/tmp/
+
+docker-compose.override.yml
+

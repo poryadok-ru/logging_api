@@ -1,0 +1,13 @@
+{
+    "server": {
+        "port": 8080,
+        "host": "localhost"
+    },
+    "database": {
+        "host": "109.73.196.28",
+        "port": 5432,
+        "user": "postgres",
+        "dbname": "logs",
+        "sslmode": "disable"
+    }
+}

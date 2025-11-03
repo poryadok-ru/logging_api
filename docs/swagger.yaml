@@ -1,0 +1,1107 @@
+basePath: /
+definitions:
+  auth_handler.CreateTokenRequest:
+    properties:
+      bot_id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      is_admin:
+        example: false
+        type: boolean
+      token_name:
+        example: Production Server
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - token_name
+    type: object
+  auth_handler.TokenResponse:
+    properties:
+      token:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+    type: object
+  auth_handler.UpdateTokenRequest:
+    properties:
+      token_name:
+        example: Production Server v2
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - token_name
+    type: object
+  bot_handler.CreateBotRequest:
+    properties:
+      bot_type:
+        enum:
+        - AI
+        - Backend
+        - Frontend
+        - Robot
+        example: Backend
+        type: string
+      code:
+        example: BOT_001
+        maxLength: 50
+        minLength: 2
+        type: string
+      description:
+        example: Бот для обработки сообщений
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      language:
+        enum:
+        - Python
+        - Go
+        - N8N
+        - PIX
+        - JS
+        - C
+        - Other
+        example: Python
+        type: string
+      name:
+        example: Telegram Bot
+        maxLength: 255
+        minLength: 2
+        type: string
+      owner_id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      tags:
+        example:
+        - telegram
+        - bot
+        items:
+          type: string
+        type: array
+    required:
+    - bot_type
+    - code
+    - language
+    - name
+    type: object
+  bot_handler.UpdateBotRequest:
+    properties:
+      bot_type:
+        enum:
+        - AI
+        - Backend
+        - Frontend
+        - Robot
+        example: AI
+        type: string
+      code:
+        example: BOT_002
+        maxLength: 50
+        minLength: 2
+        type: string
+      description:
+        example: Обновлённое описание
+        type: string
+      is_active:
+        example: false
+        type: boolean
+      language:
+        enum:
+        - Python
+        - Go
+        - N8N
+        - PIX
+        - JS
+        - C
+        - Other
+        example: Go
+        type: string
+      name:
+        example: Discord Bot
+        maxLength: 255
+        minLength: 2
+        type: string
+      owner_id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      tags:
+        example:
+        - discord
+        - ai
+        items:
+          type: string
+        type: array
+    type: object
+  eff_run_handler.CreateEffRunRequest:
+    properties:
+      extra:
+        $ref: '#/definitions/models.JSONB'
+      host:
+        example: server-01
+        type: string
+      period_from:
+        example: "2024-01-01T00:00:00Z"
+        type: string
+      period_to:
+        example: "2024-01-01T01:00:00Z"
+        type: string
+      status:
+        enum:
+        - success
+        - warning
+        - error
+        example: success
+        type: string
+    required:
+    - status
+    type: object
+  log_handler.CreateLogRequest:
+    properties:
+      msg:
+        example: Операция выполнена успешно
+        minLength: 1
+        type: string
+      status:
+        enum:
+        - success
+        - warning
+        - error
+        example: success
+        type: string
+    required:
+    - msg
+    - status
+    type: object
+  models.Bot:
+    properties:
+      bot_type:
+        description: Тип бота (AI, Backend, Frontend, Robot)
+        enum:
+        - AI
+        - Backend
+        - Frontend
+        - Robot
+        example: Backend
+        type: string
+      code:
+        description: Уникальный код бота для идентификации
+        example: BOT_001
+        type: string
+      created_at:
+        description: Дата и время создания записи
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      description:
+        description: Подробное описание функционала бота
+        example: Бот для обработки сообщений
+        type: string
+      id:
+        description: Уникальный идентификатор бота (UUID)
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      is_active:
+        description: Активен ли бот
+        example: true
+        type: boolean
+      language:
+        description: Основной язык или технология реализации
+        enum:
+        - Python
+        - Go
+        - N8N
+        - PIX
+        - JS
+        - C
+        - Other
+        example: Python
+        type: string
+      name:
+        description: Название бота
+        example: Telegram Bot
+        type: string
+      owner_id:
+        description: ID владельца бота
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      tags:
+        description: Массив тегов для классификации
+        example:
+        - telegram
+        - automation
+        items:
+          type: string
+        type: array
+      updated_at:
+        description: Дата и время последнего обновления
+        example: "2023-01-15T12:00:00Z"
+        type: string
+    required:
+    - bot_type
+    - code
+    - language
+    - name
+    type: object
+  models.EffRun:
+    properties:
+      bot_id:
+        description: ID бота
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      created_at:
+        description: Дата и время создания записи
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      extra:
+        description: Дополнительные метаданные в формате JSON
+        type: object
+      host:
+        description: Хост, на котором выполнялся бот
+        example: server-01
+        type: string
+      id:
+        description: Уникальный идентификатор запуска
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      period_from:
+        description: Начало периода выполнения
+        example: "2023-01-15T10:00:00Z"
+        type: string
+      period_to:
+        description: Конец периода выполнения
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      status:
+        description: Статус выполнения запуска
+        enum:
+        - success
+        - warning
+        - error
+        example: success
+        type: string
+    required:
+    - bot_id
+    type: object
+  models.JSONB:
+    additionalProperties: true
+    type: object
+  models.Log:
+    properties:
+      bot_id:
+        description: ID бота, отправившего лог
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      created_at:
+        description: Дата и время создания лога
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      id:
+        description: Уникальный идентификатор лога
+        example: 12345
+        type: integer
+      msg:
+        description: Текст сообщения лога
+        example: Операция выполнена успешно
+        type: string
+      status:
+        description: Статус выполнения операции
+        enum:
+        - success
+        - warning
+        - error
+        example: success
+        type: string
+    required:
+    - msg
+    type: object
+  models.Owner:
+    properties:
+      created_at:
+        description: Дата и время создания записи
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      full_name:
+        description: Полное имя владельца
+        example: Иван Иванов
+        type: string
+      id:
+        description: Уникальный идентификатор владельца (UUID)
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      is_active:
+        description: Активен ли владелец
+        example: true
+        type: boolean
+    required:
+    - full_name
+    type: object
+  models.Token:
+    properties:
+      bot_id:
+        description: ID бота, для которого создан токен (NULL для админских токенов)
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      created_at:
+        description: Дата и время создания токена
+        example: "2023-01-15T12:00:00Z"
+        type: string
+      id:
+        description: Уникальный идентификатор токена (используется как API ключ)
+        example: 550e8400-e29b-41d4-a716-446655440000
+        format: uuid
+        type: string
+      is_active:
+        description: Активен ли токен
+        example: true
+        type: boolean
+      is_admin:
+        description: Обладает ли токен административными правами
+        example: false
+        type: boolean
+      name:
+        description: Название токена
+        example: Production Server
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    type: object
+  owner_handler.CreateOwnerRequest:
+    properties:
+      full_name:
+        example: Иван Иванов
+        maxLength: 255
+        minLength: 2
+        type: string
+      is_active:
+        example: true
+        type: boolean
+    required:
+    - full_name
+    type: object
+  owner_handler.UpdateOwnerRequest:
+    properties:
+      full_name:
+        example: Иван Петров
+        maxLength: 255
+        minLength: 2
+        type: string
+      is_active:
+        example: true
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API для управления токенами и логами ботов
+  title: Logging API
+  version: "1.0"
+paths:
+  /api/v1/auth/me:
+    get:
+      description: Возвращает информацию о токене из заголовка Authorization
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить информацию о токене
+      tags:
+      - auth
+  /api/v1/bots:
+    get:
+      description: Возвращает список всех ботов (требуется админский токен)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Bot'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить всех ботов
+      tags:
+      - bots
+    post:
+      consumes:
+      - application/json
+      description: Создаёт нового бота/робота (требуется админский токен)
+      parameters:
+      - description: Данные бота
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/bot_handler.CreateBotRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Bot'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Создать бота
+      tags:
+      - bots
+  /api/v1/bots/{bot_id}:
+    delete:
+      description: Полностью удаляет бота из базы данных (требуется админский токен)
+      parameters:
+      - description: ID бота (UUID)
+        in: path
+        name: bot_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Удалить бота
+      tags:
+      - bots
+    get:
+      description: Возвращает информацию о боте по ID (требуется админский токен)
+      parameters:
+      - description: ID бота (UUID)
+        in: path
+        name: bot_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Bot'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить бота
+      tags:
+      - bots
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные бота (требуется админский токен)
+      parameters:
+      - description: ID бота (UUID)
+        in: path
+        name: bot_id
+        required: true
+        type: string
+      - description: Обновлённые данные
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/bot_handler.UpdateBotRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Bot'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Обновить бота
+      tags:
+      - bots
+  /api/v1/eff-runs:
+    post:
+      consumes:
+      - application/json
+      description: Создаёт новую запись о запуске бота (требуется авторизация, только
+        для обычных токенов с bot_id)
+      parameters:
+      - description: Данные о запуске
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/eff_run_handler.CreateEffRunRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.EffRun'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Создать запись о запуске
+      tags:
+      - eff_runs
+  /api/v1/logs:
+    post:
+      consumes:
+      - application/json
+      description: Создаёт новый лог от имени текущего бота (требуется авторизация)
+      parameters:
+      - description: Данные лога
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/log_handler.CreateLogRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Log'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Создать лог
+      tags:
+      - logs
+  /api/v1/owners:
+    get:
+      description: Возвращает список всех владельцев (требуется админский токен)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Owner'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить всех владельцев
+      tags:
+      - owners
+    post:
+      consumes:
+      - application/json
+      description: Создаёт нового владельца (требуется админский токен)
+      parameters:
+      - description: Данные владельца
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/owner_handler.CreateOwnerRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Owner'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Создать владельца
+      tags:
+      - owners
+  /api/v1/owners/{owner_id}:
+    delete:
+      description: Полностью удаляет владельца из базы данных (требуется админский
+        токен)
+      parameters:
+      - description: ID владельца (UUID)
+        in: path
+        name: owner_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Удалить владельца
+      tags:
+      - owners
+    get:
+      description: Возвращает информацию о владельце по ID (требуется админский токен)
+      parameters:
+      - description: ID владельца (UUID)
+        in: path
+        name: owner_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Owner'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить владельца
+      tags:
+      - owners
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные владельца (требуется админский токен)
+      parameters:
+      - description: ID владельца (UUID)
+        in: path
+        name: owner_id
+        required: true
+        type: string
+      - description: Обновлённые данные
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/owner_handler.UpdateOwnerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Owner'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Обновить владельца
+      tags:
+      - owners
+  /api/v1/tokens:
+    post:
+      consumes:
+      - application/json
+      description: Создаёт новый токен аутентификации для указанного бота (требуется
+        админский токен)
+      parameters:
+      - description: Данные для создания токена
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth_handler.CreateTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/auth_handler.TokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Создать новый токен
+      tags:
+      - tokens
+  /api/v1/tokens/{token_id}:
+    delete:
+      description: Полностью удаляет токен из базы данных (требуется админский токен)
+      parameters:
+      - description: ID токена (UUID)
+        in: path
+        name: token_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Удалить токен
+      tags:
+      - tokens
+    put:
+      consumes:
+      - application/json
+      description: Обновляет название существующего токена (требуется админский токен)
+      parameters:
+      - description: ID токена (UUID)
+        in: path
+        name: token_id
+        required: true
+        type: string
+      - description: Новое название токена
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth_handler.UpdateTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Обновить токен
+      tags:
+      - tokens
+  /api/v1/tokens/{token_id}/deactivate:
+    patch:
+      description: Деактивирует токен (мягкое удаление, токен перестаёт работать,
+        требуется админский токен)
+      parameters:
+      - description: ID токена (UUID)
+        in: path
+        name: token_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Деактивировать токен
+      tags:
+      - tokens
+securityDefinitions:
+  BearerAuth:
+    description: 'Введите токен в формате: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
