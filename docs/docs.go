@@ -1282,11 +1282,13 @@ const docTemplate = `{
                 "status": {
                     "type": "string",
                     "enum": [
-                        "success",
-                        "warning",
-                        "error"
+                        "Debug",
+                        "Info",
+                        "Warning",
+                        "Error",
+                        "Critical"
                     ],
-                    "example": "success"
+                    "example": "Info"
                 }
             }
         },
@@ -1464,14 +1466,16 @@ const docTemplate = `{
                     "example": "Операция выполнена успешно"
                 },
                 "status": {
-                    "description": "Статус выполнения операции",
+                    "description": "Уровень лога",
                     "type": "string",
                     "enum": [
-                        "success",
-                        "warning",
-                        "error"
+                        "Debug",
+                        "Info",
+                        "Warning",
+                        "Error",
+                        "Critical"
                     ],
-                    "example": "success"
+                    "example": "Info"
                 }
             }
         },
