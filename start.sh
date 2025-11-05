@@ -1,15 +1,18 @@
 #!/bin/bash
 
-# Остановить и удалить старый контейнер, если он существует
+# Проверка наличия .env файла
+if [ ! -f .env ]; then
+    echo "⚠️  Файл .env не найден!"
+    echo "Скопируйте .env.example в .env и настройте параметры"
+    exit 1
+fi
+
+# Остановить и удалить старый контейнер, если существует
 docker stop logging_api 2>/dev/null || true
 docker rm logging_api 2>/dev/null || true
 
-# Собрать образ
-echo "Сборка Docker образа..."
-docker build -t logging_api:latest .
-
 # Запустить контейнер
-echo "Запуск контейнера..."
+echo "Запуск контейнера logging_api..."
 docker run -d \
   --name logging_api \
   --restart unless-stopped \
@@ -17,8 +20,15 @@ docker run -d \
   --env-file .env \
   logging_api:latest
 
-echo "Контейнер запущен!"
-echo "Проверьте логи: docker logs -f logging_api"
-echo "API доступен на http://localhost:8080"
-echo "Swagger: http://localhost:8080/swagger/index.html"
+if [ $? -eq 0 ]; then
+    echo "✓ Контейнер запущен!"
+    echo ""
+    echo "Полезные команды:"
+    echo "  Логи:    docker logs -f logging_api"
+    echo "  API:     http://localhost:8080"
+    echo "  Swagger: http://localhost:8080/swagger/index.html"
+else
+    echo "✗ Ошибка запуска контейнера"
+    exit 1
+fi
 

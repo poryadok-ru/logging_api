@@ -1,14 +1,24 @@
+# Переменные окружения
 .env
+.env.local
 
+# IDE
 .idea
 .vscode
 .DS_Store
 
+# Бинарники
 logging_api
 *.exe
+*.test
 
+# Логи
 *.log
 /tmp/
 
+# Docker
 docker-compose.override.yml
 
+# Покрытие тестов
+coverage.out
+*.coverprofile
