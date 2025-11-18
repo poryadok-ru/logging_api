@@ -30,14 +30,14 @@ make run
 
 ## 📚 Документация
 
-Swagger UI доступен по адресу: `http://localhost:8080/swagger/index.html`
+Swagger UI доступен по адресу: `https://api.alexmayka.ru/swagger/index.html`
 
 ## 🔑 Аутентификация
 
 Все эндпоинты (кроме `/health`) требуют авторизации через Bearer токен:
 
 ```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" http://localhost:8080/api/v1/auth/me
+curl -H "Authorization: Bearer YOUR_TOKEN" https://api.alexmayka.ru/api/v1/auth/me
 ```
 
 ### Типы токенов:
@@ -160,7 +160,7 @@ logging_api/
 
 ### Создание бота
 ```bash
-curl -X POST http://localhost:8080/api/v1/bots \
+curl -X POST https://api.alexmayka.ru/api/v1/bots \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -175,7 +175,7 @@ curl -X POST http://localhost:8080/api/v1/bots \
 
 ### Создание лога
 ```bash
-curl -X POST http://localhost:8080/api/v1/logs \
+curl -X POST https://api.alexmayka.ru/api/v1/logs \
   -H "Authorization: Bearer BOT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
