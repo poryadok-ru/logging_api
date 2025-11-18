@@ -41,7 +41,7 @@ func NewAuthService(authRepo AuthRepoInterface, botsRepo BotsRepoInterface) *Aut
 }
 
 func (s *AuthService) CreateToken(botID *string, tokenName string, isAdmin bool) (*models.Token, error) {
-	// Если токен НЕ админский, bot_id обязателен
+
 	if !isAdmin {
 		if botID == nil || *botID == "" {
 			return nil, fmt.Errorf("%w: bot_id обязателен для обычных токенов", customerrors.ErrNotFound)
@@ -55,7 +55,6 @@ func (s *AuthService) CreateToken(botID *string, tokenName string, isAdmin bool)
 			return nil, fmt.Errorf("ошибка проверки бота: %w", err)
 		}
 	}
-	// Если админский токен, bot_id может быть NULL
 
 	token, err := s.authRepo.CreateToken(botID, tokenName, isAdmin)
 	if err != nil {

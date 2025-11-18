@@ -62,7 +62,6 @@ func (r *AuthRepo) GetTokenByID(tokenID string) (*models.Token, error) {
 	return &token, nil
 }
 
-// GetTokenWithOwner получает токен вместе с owner_id через LEFT JOIN с bots
 func (r *AuthRepo) GetTokenWithOwner(tokenID string) (token *models.Token, ownerID string, err error) {
 	query := `
 		SELECT t.id, t.bot_id, t.name, t.is_active, t.is_admin, t.created_at, b.owner_id

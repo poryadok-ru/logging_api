@@ -28,7 +28,6 @@ func NewAuthHandler(authService AuthService) *AuthHandler {
 	}
 }
 
-// CreateToken создаёт новый токен для бота
 // @Summary Создать новый токен
 // @Description Создаёт новый токен аутентификации для указанного бота (требуется админский токен)
 // @Tags tokens
@@ -73,7 +72,6 @@ func (h *AuthHandler) CreateToken(c *gin.Context) {
 	c.JSON(http.StatusCreated, TokenResponse{Token: token.ID})
 }
 
-// UpdateToken обновляет название токена
 // @Summary Обновить токен
 // @Description Обновляет название существующего токена (требуется админский токен)
 // @Tags tokens
@@ -122,7 +120,6 @@ func (h *AuthHandler) UpdateToken(c *gin.Context) {
 	})
 }
 
-// DeactivateToken деактивирует токен
 // @Summary Деактивировать токен
 // @Description Деактивирует токен (мягкое удаление, токен перестаёт работать, требуется админский токен)
 // @Tags tokens
@@ -148,7 +145,6 @@ func (h *AuthHandler) DeactivateToken(c *gin.Context) {
 	})
 }
 
-// DeleteToken удаляет токен
 // @Summary Удалить токен
 // @Description Полностью удаляет токен из базы данных (требуется админский токен)
 // @Tags tokens
@@ -174,7 +170,6 @@ func (h *AuthHandler) DeleteToken(c *gin.Context) {
 	})
 }
 
-// GetMe возвращает информацию о текущем токене
 // @Summary Получить информацию о токене
 // @Description Возвращает информацию о токене из заголовка Authorization
 // @Tags auth

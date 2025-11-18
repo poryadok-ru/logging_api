@@ -25,7 +25,6 @@ func SetupRoutes(
 ) *gin.Engine {
 	router := gin.Default()
 
-	// Swagger
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("/swagger/doc.json")))
 
 	router.GET("/health", func(c *gin.Context) {
@@ -34,14 +33,12 @@ func SetupRoutes(
 
 	api := router.Group("/api/v1")
 	{
-		// Auth endpoints (требуют авторизации)
 		auth := api.Group("/auth")
 		auth.Use(authMiddleware.AuthRequired())
 		{
 			auth.GET("/me", authHandler.GetMe)
 		}
 
-		// Token management (требуют админских прав)
 		tokens := api.Group("/tokens")
 		tokens.Use(authMiddleware.AdminRequired())
 		{
@@ -51,7 +48,6 @@ func SetupRoutes(
 			tokens.DELETE("/:token_id", authHandler.DeleteToken)
 		}
 
-		// Owners CRUD (требуют админских прав)
 		owners := api.Group("/owners")
 		owners.Use(authMiddleware.AdminRequired())
 		{
@@ -62,7 +58,6 @@ func SetupRoutes(
 			owners.DELETE("/:owner_id", ownerHandler.DeleteOwner)
 		}
 
-		// Bots CRUD (требуют админских прав)
 		bots := api.Group("/bots")
 		bots.Use(authMiddleware.AdminRequired())
 		{
@@ -73,14 +68,12 @@ func SetupRoutes(
 			bots.DELETE("/:bot_id", botHandler.DeleteBot)
 		}
 
-		// Logs CREATE (требуют авторизации)
 		logs := api.Group("/logs")
 		logs.Use(authMiddleware.AuthRequired())
 		{
 			logs.POST("", logHandler.CreateLog)
 		}
 
-		// Eff Runs CREATE (требуют авторизации)
 		effRuns := api.Group("/eff-runs")
 		effRuns.Use(authMiddleware.AuthRequired())
 		{

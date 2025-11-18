@@ -25,7 +25,6 @@ func NewEffRunHandler(effRunService EffRunService) *EffRunHandler {
 	}
 }
 
-// CreateEffRun создаёт новую запись о запуске
 // @Summary Создать запись о запуске
 // @Description Создаёт новую запись о запуске бота (требуется авторизация, только для обычных токенов с bot_id)
 // @Tags eff_runs
@@ -51,7 +50,6 @@ func (h *EffRunHandler) CreateEffRun(c *gin.Context) {
 		return
 	}
 
-	// Получаем bot_id из контекста (установлен middleware)
 	botID, exists := c.Get("bot_id")
 	if !exists || botID == "" {
 		c.JSON(http.StatusForbidden, gin.H{"error": "для создания записи о запуске требуется токен с привязкой к боту"})

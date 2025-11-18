@@ -57,24 +57,20 @@ func main() {
 
 	log.Println("Successfully connected to database!")
 
-	// Инициализация репозиториев
 	authRepo := authrepo.NewAuthRepo(db)
 	botRepo := botrepo.NewBotRepo(db)
 	ownerRepo := ownerrepo.NewOwnerRepo(db)
 	logRepo := logrepo.NewLogRepo(db)
 	effRunRepo := effrunrepo.NewEffRunRepo(db)
 
-	// Инициализация сервисов
 	authService := authservice.NewAuthService(authRepo, botRepo)
 	botService := botservice.NewBotService(botRepo)
 	ownerService := ownerservice.NewOwnerService(ownerRepo)
 	logService := logservice.NewLogService(logRepo)
 	effRunService := effrunservice.NewEffRunService(effRunRepo)
 
-	// Инициализация middleware
 	authMiddleware := middleware.NewAuthMiddleware(authService)
 
-	// Инициализация handlers
 	authHandler := auth_handler.NewAuthHandler(authService)
 	botHandler := bot_handler.NewBotHandler(botService)
 	ownerHandler := owner_handler.NewOwnerHandler(ownerService)

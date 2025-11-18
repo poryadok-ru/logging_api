@@ -29,7 +29,6 @@ func NewBotHandler(botService BotService) *BotHandler {
 	}
 }
 
-// CreateBot создаёт нового бота
 // @Summary Создать бота
 // @Description Создаёт нового бота/робота (требуется админский токен)
 // @Tags bots
@@ -75,7 +74,6 @@ func (h *BotHandler) CreateBot(c *gin.Context) {
 	c.JSON(http.StatusCreated, createdBot)
 }
 
-// GetBot получает бота по ID
 // @Summary Получить бота
 // @Description Возвращает информацию о боте по ID (требуется админский токен)
 // @Tags bots
@@ -104,7 +102,6 @@ func (h *BotHandler) GetBot(c *gin.Context) {
 	c.JSON(http.StatusOK, bot)
 }
 
-// GetAllBots получает список всех ботов
 // @Summary Получить всех ботов
 // @Description Возвращает список всех ботов (требуется админский токен)
 // @Tags bots
@@ -125,7 +122,6 @@ func (h *BotHandler) GetAllBots(c *gin.Context) {
 	c.JSON(http.StatusOK, bots)
 }
 
-// UpdateBot обновляет данные бота
 // @Summary Обновить бота
 // @Description Обновляет данные бота (требуется админский токен)
 // @Tags bots
@@ -154,7 +150,6 @@ func (h *BotHandler) UpdateBot(c *gin.Context) {
 		return
 	}
 
-	// Получаем существующего бота
 	existingBot, err := h.botService.GetBotByID(botID)
 	if err != nil {
 		if customerrors.IsNotFound(err) {
@@ -165,7 +160,6 @@ func (h *BotHandler) UpdateBot(c *gin.Context) {
 		return
 	}
 
-	// Обновляем только переданные поля
 	if request.Code != nil {
 		existingBot.Code = *request.Code
 	}
@@ -204,7 +198,6 @@ func (h *BotHandler) UpdateBot(c *gin.Context) {
 	c.JSON(http.StatusOK, updatedBot)
 }
 
-// DeleteBot удаляет бота
 // @Summary Удалить бота
 // @Description Полностью удаляет бота из базы данных (требуется админский токен)
 // @Tags bots
@@ -227,4 +220,3 @@ func (h *BotHandler) DeleteBot(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "бот удалён"})
 }
-

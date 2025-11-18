@@ -28,7 +28,6 @@ func NewOwnerHandler(ownerService OwnerService) *OwnerHandler {
 	}
 }
 
-// CreateOwner создаёт нового владельца
 // @Summary Создать владельца
 // @Description Создаёт нового владельца (требуется админский токен)
 // @Tags owners
@@ -63,7 +62,6 @@ func (h *OwnerHandler) CreateOwner(c *gin.Context) {
 	c.JSON(http.StatusCreated, owner)
 }
 
-// GetOwner получает владельца по ID
 // @Summary Получить владельца
 // @Description Возвращает информацию о владельце по ID (требуется админский токен)
 // @Tags owners
@@ -92,7 +90,6 @@ func (h *OwnerHandler) GetOwner(c *gin.Context) {
 	c.JSON(http.StatusOK, owner)
 }
 
-// GetAllOwners получает список всех владельцев
 // @Summary Получить всех владельцев
 // @Description Возвращает список всех владельцев (требуется админский токен)
 // @Tags owners
@@ -113,7 +110,6 @@ func (h *OwnerHandler) GetAllOwners(c *gin.Context) {
 	c.JSON(http.StatusOK, owners)
 }
 
-// UpdateOwner обновляет данные владельца
 // @Summary Обновить владельца
 // @Description Обновляет данные владельца (требуется админский токен)
 // @Tags owners
@@ -155,7 +151,6 @@ func (h *OwnerHandler) UpdateOwner(c *gin.Context) {
 	c.JSON(http.StatusOK, owner)
 }
 
-// DeleteOwner удаляет владельца
 // @Summary Удалить владельца
 // @Description Полностью удаляет владельца из базы данных (требуется админский токен)
 // @Tags owners

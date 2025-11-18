@@ -23,7 +23,6 @@ func NewLogHandler(logService LogService) *LogHandler {
 	}
 }
 
-// CreateLog создаёт новый лог
 // @Summary Создать лог
 // @Description Создаёт новый лог от имени текущего бота (требуется авторизация)
 // @Tags logs
@@ -48,10 +47,8 @@ func (h *LogHandler) CreateLog(c *gin.Context) {
 		return
 	}
 
-	// Получаем bot_id из контекста (установлен middleware)
 	botID, exists := c.Get("bot_id")
 	if !exists {
-		// Если bot_id нет (админский токен), создаём лог без привязки к боту
 		log, err := h.logService.CreateLog(nil, request.Status, request.Msg)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -70,4 +67,3 @@ func (h *LogHandler) CreateLog(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, log)
 }
-
