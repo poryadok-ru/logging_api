@@ -30,14 +30,15 @@ make run
 
 ## 📚 Документация
 
-Swagger UI доступен по адресу: `https://api.alexmayka.ru/swagger/index.html`
+Swagger UI доступен по адресу: `https://api.automation.poryadok.ru/logging/swagger/index.html`
 
 ## 🔑 Аутентификация
 
-Все эндпоинты (кроме `/health`) требуют авторизации через Bearer токен:
+Все эндпоинты (кроме `/health`) требуют авторизации через Bearer токен.
+Снаружи доступ к API осуществляется через префикс `/logging`:
 
 ```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" https://api.alexmayka.ru/api/v1/auth/me
+curl -H "Authorization: Bearer YOUR_TOKEN" https://api.automation.poryadok.ru/logging/v1/auth/me
 ```
 
 ### Типы токенов:
@@ -48,33 +49,33 @@ curl -H "Authorization: Bearer YOUR_TOKEN" https://api.alexmayka.ru/api/v1/auth/
 ## 📡 API Endpoints
 
 ### Owners (только админы)
-- `POST /api/v1/owners` - создать владельца
-- `GET /api/v1/owners` - список владельцев
-- `GET /api/v1/owners/:id` - получить владельца
-- `PUT /api/v1/owners/:id` - обновить владельца
-- `DELETE /api/v1/owners/:id` - удалить владельца
+- `POST /v1/owners` - создать владельца
+- `GET /v1/owners` - список владельцев
+- `GET /v1/owners/:id` - получить владельца
+- `PUT /v1/owners/:id` - обновить владельца
+- `DELETE /v1/owners/:id` - удалить владельца
 
 ### Bots (только админы)
-- `POST /api/v1/bots` - создать бота
-- `GET /api/v1/bots` - список ботов
-- `GET /api/v1/bots/:id` - получить бота
-- `PUT /api/v1/bots/:id` - обновить бота
-- `DELETE /api/v1/bots/:id` - удалить бота
+- `POST /v1/bots` - создать бота
+- `GET /v1/bots` - список ботов
+- `GET /v1/bots/:id` - получить бота
+- `PUT /v1/bots/:id` - обновить бота
+- `DELETE /v1/bots/:id` - удалить бота
 
 ### Tokens (только админы)
-- `POST /api/v1/tokens` - создать токен
-- `PUT /api/v1/tokens/:id` - обновить токен
-- `DELETE /api/v1/tokens/:id` - удалить токен
+- `POST /v1/tokens` - создать токен
+- `PUT /v1/tokens/:id` - обновить токен
+- `DELETE /v1/tokens/:id` - удалить токен
 
 ### Logs (любой авторизованный токен)
-- `POST /api/v1/logs` - создать лог
+- `POST /v1/logs` - создать лог
   - Уровни: `Debug`, `Info`, `Warning`, `Error`, `Critical`
 
 ### Eff Runs (токен с bot_id)
-- `POST /api/v1/eff-runs` - создать запись о запуске
+- `POST /v1/eff-runs` - создать запись о запуске
 
 ### Auth
-- `GET /api/v1/auth/me` - информация о токене
+- `GET /v1/auth/me` - информация о токене
 
 ## 🐳 Docker команды
 
@@ -160,7 +161,7 @@ logging_api/
 
 ### Создание бота
 ```bash
-curl -X POST https://api.alexmayka.ru/api/v1/bots \
+curl -X POST https://api.automation.poryadok.ru/logging/v1/bots \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -175,7 +176,7 @@ curl -X POST https://api.alexmayka.ru/api/v1/bots \
 
 ### Создание лога
 ```bash
-curl -X POST https://api.alexmayka.ru/api/v1/logs \
+curl -X POST https://api.automation.poryadok.ru/logging/v1/logs \
   -H "Authorization: Bearer BOT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

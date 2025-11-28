@@ -38,7 +38,7 @@ func SetupRoutes(
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
-	api := router.Group("/api/v1")
+	api := router.Group("/v1")
 	{
 		auth := api.Group("/auth")
 		auth.Use(authMiddleware.AuthRequired())
