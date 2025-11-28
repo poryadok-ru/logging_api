@@ -178,7 +178,6 @@ definitions:
   models.Bot:
     properties:
       bot_type:
-        description: Тип бота (AI, Backend, Frontend, Robot)
         enum:
         - AI
         - Backend
@@ -187,28 +186,22 @@ definitions:
         example: Backend
         type: string
       code:
-        description: Уникальный код бота для идентификации
         example: BOT_001
         type: string
       created_at:
-        description: Дата и время создания записи
         example: "2023-01-15T12:00:00Z"
         type: string
       description:
-        description: Подробное описание функционала бота
         example: Бот для обработки сообщений
         type: string
       id:
-        description: Уникальный идентификатор бота (UUID)
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       is_active:
-        description: Активен ли бот
         example: true
         type: boolean
       language:
-        description: Основной язык или технология реализации
         enum:
         - Python
         - Go
@@ -220,15 +213,12 @@ definitions:
         example: Python
         type: string
       name:
-        description: Название бота
         example: Telegram Bot
         type: string
       owner_id:
-        description: ID владельца бота
         example: 550e8400-e29b-41d4-a716-446655440000
         type: string
       tags:
-        description: Массив тегов для классификации
         example:
         - telegram
         - automation
@@ -236,7 +226,6 @@ definitions:
           type: string
         type: array
       updated_at:
-        description: Дата и время последнего обновления
         example: "2023-01-15T12:00:00Z"
         type: string
     required:
@@ -248,36 +237,28 @@ definitions:
   models.EffRun:
     properties:
       bot_id:
-        description: ID бота
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       created_at:
-        description: Дата и время создания записи
         example: "2023-01-15T12:00:00Z"
         type: string
       extra:
-        description: Дополнительные метаданные в формате JSON
         type: object
       host:
-        description: Хост, на котором выполнялся бот
         example: server-01
         type: string
       id:
-        description: Уникальный идентификатор запуска
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       period_from:
-        description: Начало периода выполнения
         example: "2023-01-15T10:00:00Z"
         type: string
       period_to:
-        description: Конец периода выполнения
         example: "2023-01-15T12:00:00Z"
         type: string
       status:
-        description: Статус выполнения запуска
         enum:
         - success
         - warning
@@ -293,24 +274,19 @@ definitions:
   models.Log:
     properties:
       bot_id:
-        description: ID бота, отправившего лог
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       created_at:
-        description: Дата и время создания лога
         example: "2023-01-15T12:00:00Z"
         type: string
       id:
-        description: Уникальный идентификатор лога
         example: 12345
         type: integer
       msg:
-        description: Текст сообщения лога
         example: Операция выполнена успешно
         type: string
       status:
-        description: Уровень лога
         enum:
         - Debug
         - Info
@@ -325,20 +301,16 @@ definitions:
   models.Owner:
     properties:
       created_at:
-        description: Дата и время создания записи
         example: "2023-01-15T12:00:00Z"
         type: string
       full_name:
-        description: Полное имя владельца
         example: Иван Иванов
         type: string
       id:
-        description: Уникальный идентификатор владельца (UUID)
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       is_active:
-        description: Активен ли владелец
         example: true
         type: boolean
     required:
@@ -347,29 +319,23 @@ definitions:
   models.Token:
     properties:
       bot_id:
-        description: ID бота, для которого создан токен (NULL для админских токенов)
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       created_at:
-        description: Дата и время создания токена
         example: "2023-01-15T12:00:00Z"
         type: string
       id:
-        description: Уникальный идентификатор токена (используется как API ключ)
         example: 550e8400-e29b-41d4-a716-446655440000
         format: uuid
         type: string
       is_active:
-        description: Активен ли токен
         example: true
         type: boolean
       is_admin:
-        description: Обладает ли токен административными правами
         example: false
         type: boolean
       name:
-        description: Название токена
         example: Production Server
         maxLength: 100
         minLength: 3
@@ -401,10 +367,10 @@ definitions:
         example: true
         type: boolean
     type: object
-host: api.alexmayka.ru
+host: api.automation.poryadok.ru
 info:
   contact: {}
-  description: API для управления токенами и логами ботов
+  description: API для управления логами ботов
   title: Logging API
   version: "1.0"
 paths:

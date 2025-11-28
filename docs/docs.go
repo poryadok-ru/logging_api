@@ -1302,7 +1302,6 @@ const docTemplate = `{
             ],
             "properties": {
                 "bot_type": {
-                    "description": "Тип бота (AI, Backend, Frontend, Robot)",
                     "type": "string",
                     "enum": [
                         "AI",
@@ -1313,33 +1312,27 @@ const docTemplate = `{
                     "example": "Backend"
                 },
                 "code": {
-                    "description": "Уникальный код бота для идентификации",
                     "type": "string",
                     "example": "BOT_001"
                 },
                 "created_at": {
-                    "description": "Дата и время создания записи",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "description": {
-                    "description": "Подробное описание функционала бота",
                     "type": "string",
                     "example": "Бот для обработки сообщений"
                 },
                 "id": {
-                    "description": "Уникальный идентификатор бота (UUID)",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "is_active": {
-                    "description": "Активен ли бот",
                     "type": "boolean",
                     "example": true
                 },
                 "language": {
-                    "description": "Основной язык или технология реализации",
                     "type": "string",
                     "enum": [
                         "Python",
@@ -1353,17 +1346,14 @@ const docTemplate = `{
                     "example": "Python"
                 },
                 "name": {
-                    "description": "Название бота",
                     "type": "string",
                     "example": "Telegram Bot"
                 },
                 "owner_id": {
-                    "description": "ID владельца бота",
                     "type": "string",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "tags": {
-                    "description": "Массив тегов для классификации",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -1374,7 +1364,6 @@ const docTemplate = `{
                     ]
                 },
                 "updated_at": {
-                    "description": "Дата и время последнего обновления",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 }
@@ -1387,43 +1376,35 @@ const docTemplate = `{
             ],
             "properties": {
                 "bot_id": {
-                    "description": "ID бота",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "created_at": {
-                    "description": "Дата и время создания записи",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "extra": {
-                    "description": "Дополнительные метаданные в формате JSON",
                     "type": "object"
                 },
                 "host": {
-                    "description": "Хост, на котором выполнялся бот",
                     "type": "string",
                     "example": "server-01"
                 },
                 "id": {
-                    "description": "Уникальный идентификатор запуска",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "period_from": {
-                    "description": "Начало периода выполнения",
                     "type": "string",
                     "example": "2023-01-15T10:00:00Z"
                 },
                 "period_to": {
-                    "description": "Конец периода выполнения",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "status": {
-                    "description": "Статус выполнения запуска",
                     "type": "string",
                     "enum": [
                         "success",
@@ -1445,28 +1426,23 @@ const docTemplate = `{
             ],
             "properties": {
                 "bot_id": {
-                    "description": "ID бота, отправившего лог",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "created_at": {
-                    "description": "Дата и время создания лога",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "id": {
-                    "description": "Уникальный идентификатор лога",
                     "type": "integer",
                     "example": 12345
                 },
                 "msg": {
-                    "description": "Текст сообщения лога",
                     "type": "string",
                     "example": "Операция выполнена успешно"
                 },
                 "status": {
-                    "description": "Уровень лога",
                     "type": "string",
                     "enum": [
                         "Debug",
@@ -1486,23 +1462,19 @@ const docTemplate = `{
             ],
             "properties": {
                 "created_at": {
-                    "description": "Дата и время создания записи",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "full_name": {
-                    "description": "Полное имя владельца",
                     "type": "string",
                     "example": "Иван Иванов"
                 },
                 "id": {
-                    "description": "Уникальный идентификатор владельца (UUID)",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "is_active": {
-                    "description": "Активен ли владелец",
                     "type": "boolean",
                     "example": true
                 }
@@ -1515,34 +1487,28 @@ const docTemplate = `{
             ],
             "properties": {
                 "bot_id": {
-                    "description": "ID бота, для которого создан токен (NULL для админских токенов)",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "created_at": {
-                    "description": "Дата и время создания токена",
                     "type": "string",
                     "example": "2023-01-15T12:00:00Z"
                 },
                 "id": {
-                    "description": "Уникальный идентификатор токена (используется как API ключ)",
                     "type": "string",
                     "format": "uuid",
                     "example": "550e8400-e29b-41d4-a716-446655440000"
                 },
                 "is_active": {
-                    "description": "Активен ли токен",
                     "type": "boolean",
                     "example": true
                 },
                 "is_admin": {
-                    "description": "Обладает ли токен административными правами",
                     "type": "boolean",
                     "example": false
                 },
                 "name": {
-                    "description": "Название токена",
                     "type": "string",
                     "maxLength": 100,
                     "minLength": 3,
@@ -1597,11 +1563,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "api.alexmayka.ru",
+	Host:             "api.automation.poryadok.ru",
 	BasePath:         "/",
 	Schemes:          []string{"https"},
 	Title:            "Logging API",
-	Description:      "API для управления токенами и логами ботов",
+	Description:      "API для управления логами ботов",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
