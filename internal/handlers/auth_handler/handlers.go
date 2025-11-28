@@ -41,7 +41,7 @@ func NewAuthHandler(authService AuthService) *AuthHandler {
 // @Failure 403 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/tokens [post]
+// @Router /v1/tokens [post]
 func (h *AuthHandler) CreateToken(c *gin.Context) {
 	var request CreateTokenRequest
 
@@ -85,7 +85,7 @@ func (h *AuthHandler) CreateToken(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/tokens/{token_id} [put]
+// @Router /v1/tokens/{token_id} [put]
 func (h *AuthHandler) UpdateToken(c *gin.Context) {
 	tokenID := c.Param("token_id")
 
@@ -130,7 +130,7 @@ func (h *AuthHandler) UpdateToken(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/tokens/{token_id}/deactivate [patch]
+// @Router /v1/tokens/{token_id}/deactivate [patch]
 func (h *AuthHandler) DeactivateToken(c *gin.Context) {
 	tokenID := c.Param("token_id")
 
@@ -155,7 +155,7 @@ func (h *AuthHandler) DeactivateToken(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/tokens/{token_id} [delete]
+// @Router /v1/tokens/{token_id} [delete]
 func (h *AuthHandler) DeleteToken(c *gin.Context) {
 	tokenID := c.Param("token_id")
 
@@ -178,7 +178,7 @@ func (h *AuthHandler) DeleteToken(c *gin.Context) {
 // @Success 200 {object} models.Token
 // @Failure 401 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/auth/me [get]
+// @Router /v1/auth/me [get]
 func (h *AuthHandler) GetMe(c *gin.Context) {
 	tokenID, exists := c.Get("token_id")
 	if !exists {

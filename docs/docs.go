@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/auth/me": {
+        "/v1/auth/me": {
             "get": {
                 "security": [
                     {
@@ -54,7 +54,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/bots": {
+        "/v1/bots": {
             "get": {
                 "security": [
                     {
@@ -168,7 +168,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/bots/{bot_id}": {
+        "/v1/bots/{bot_id}": {
             "get": {
                 "security": [
                     {
@@ -363,7 +363,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/eff-runs": {
+        "/v1/eff-runs": {
             "post": {
                 "security": [
                     {
@@ -430,7 +430,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/logs": {
+        "/v1/logs": {
             "post": {
                 "security": [
                     {
@@ -490,7 +490,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/owners": {
+        "/v1/owners": {
             "get": {
                 "security": [
                     {
@@ -604,7 +604,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/owners/{owner_id}": {
+        "/v1/owners/{owner_id}": {
             "get": {
                 "security": [
                     {
@@ -799,7 +799,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tokens": {
+        "/v1/tokens": {
             "post": {
                 "security": [
                     {
@@ -873,7 +873,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tokens/{token_id}": {
+        "/v1/tokens/{token_id}": {
             "put": {
                 "security": [
                     {
@@ -1002,7 +1002,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/tokens/{token_id}/deactivate": {
+        "/v1/tokens/{token_id}/deactivate": {
             "patch": {
                 "security": [
                     {
