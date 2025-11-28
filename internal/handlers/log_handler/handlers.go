@@ -34,7 +34,7 @@ func NewLogHandler(logService LogService) *LogHandler {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 401 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/logs [post]
+// @Router /v1/logs [post]
 func (h *LogHandler) CreateLog(c *gin.Context) {
 	var request CreateLogRequest
 

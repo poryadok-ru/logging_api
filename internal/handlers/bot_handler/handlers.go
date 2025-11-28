@@ -41,7 +41,7 @@ func NewBotHandler(botService BotService) *BotHandler {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/bots [post]
+// @Router /v1/bots [post]
 func (h *BotHandler) CreateBot(c *gin.Context) {
 	var request CreateBotRequest
 
@@ -85,7 +85,7 @@ func (h *BotHandler) CreateBot(c *gin.Context) {
 // @Failure 403 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/bots/{bot_id} [get]
+// @Router /v1/bots/{bot_id} [get]
 func (h *BotHandler) GetBot(c *gin.Context) {
 	botID := c.Param("bot_id")
 
@@ -111,7 +111,7 @@ func (h *BotHandler) GetBot(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/bots [get]
+// @Router /v1/bots [get]
 func (h *BotHandler) GetAllBots(c *gin.Context) {
 	bots, err := h.botService.GetAllBots()
 	if err != nil {
@@ -136,7 +136,7 @@ func (h *BotHandler) GetAllBots(c *gin.Context) {
 // @Failure 403 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/bots/{bot_id} [put]
+// @Router /v1/bots/{bot_id} [put]
 func (h *BotHandler) UpdateBot(c *gin.Context) {
 	botID := c.Param("bot_id")
 
@@ -208,7 +208,7 @@ func (h *BotHandler) UpdateBot(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/bots/{bot_id} [delete]
+// @Router /v1/bots/{bot_id} [delete]
 func (h *BotHandler) DeleteBot(c *gin.Context) {
 	botID := c.Param("bot_id")
 

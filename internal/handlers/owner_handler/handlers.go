@@ -40,7 +40,7 @@ func NewOwnerHandler(ownerService OwnerService) *OwnerHandler {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/owners [post]
+// @Router /v1/owners [post]
 func (h *OwnerHandler) CreateOwner(c *gin.Context) {
 	var request CreateOwnerRequest
 
@@ -73,7 +73,7 @@ func (h *OwnerHandler) CreateOwner(c *gin.Context) {
 // @Failure 403 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/owners/{owner_id} [get]
+// @Router /v1/owners/{owner_id} [get]
 func (h *OwnerHandler) GetOwner(c *gin.Context) {
 	ownerID := c.Param("owner_id")
 
@@ -99,7 +99,7 @@ func (h *OwnerHandler) GetOwner(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/owners [get]
+// @Router /v1/owners [get]
 func (h *OwnerHandler) GetAllOwners(c *gin.Context) {
 	owners, err := h.ownerService.GetAllOwners()
 	if err != nil {
@@ -124,7 +124,7 @@ func (h *OwnerHandler) GetAllOwners(c *gin.Context) {
 // @Failure 403 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/owners/{owner_id} [put]
+// @Router /v1/owners/{owner_id} [put]
 func (h *OwnerHandler) UpdateOwner(c *gin.Context) {
 	ownerID := c.Param("owner_id")
 
@@ -161,7 +161,7 @@ func (h *OwnerHandler) UpdateOwner(c *gin.Context) {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/owners/{owner_id} [delete]
+// @Router /v1/owners/{owner_id} [delete]
 func (h *OwnerHandler) DeleteOwner(c *gin.Context) {
 	ownerID := c.Param("owner_id")
 

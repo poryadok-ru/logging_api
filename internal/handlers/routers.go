@@ -27,11 +27,18 @@ func SetupRoutes(
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("/logging/swagger/doc.json")))
 
+	// HealthCheck godoc
+	// @Summary      Health check
+	// @Description  Проверка работоспособности сервиса логирования
+	// @Tags         health
+	// @Produce      json
+	// @Success      200  {object}  map[string]string
+	// @Router       /health [get]
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
-	api := router.Group("/api/v1")
+	api := router.Group("/v1")
 	{
 		auth := api.Group("/auth")
 		auth.Use(authMiddleware.AuthRequired())

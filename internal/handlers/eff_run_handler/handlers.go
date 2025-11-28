@@ -37,7 +37,7 @@ func NewEffRunHandler(effRunService EffRunService) *EffRunHandler {
 // @Failure 401 {object} map[string]interface{}
 // @Failure 403 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
-// @Router /api/v1/eff-runs [post]
+// @Router /v1/eff-runs [post]
 func (h *EffRunHandler) CreateEffRun(c *gin.Context) {
 	var request CreateEffRunRequest
 

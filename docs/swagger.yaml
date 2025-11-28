@@ -1,4 +1,4 @@
-basePath: /
+basePath: /logging
 definitions:
   auth_handler.CreateTokenRequest:
     properties:
@@ -370,11 +370,12 @@ definitions:
 host: api.automation.poryadok.ru
 info:
   contact: {}
-  description: API для управления логами ботов
+  description: 'API для управления логами ботов. Для авторизации используйте заголовок
+    Authorization: Bearer {token}.'
   title: Logging API
   version: "1.0"
 paths:
-  /api/v1/auth/me:
+  /v1/auth/me:
     get:
       description: Возвращает информацию о токене из заголовка Authorization
       produces:
@@ -399,7 +400,7 @@ paths:
       summary: Получить информацию о токене
       tags:
       - auth
-  /api/v1/bots:
+  /v1/bots:
     get:
       description: Возвращает список всех ботов (требуется админский токен)
       produces:
@@ -474,7 +475,7 @@ paths:
       summary: Создать бота
       tags:
       - bots
-  /api/v1/bots/{bot_id}:
+  /v1/bots/{bot_id}:
     delete:
       description: Полностью удаляет бота из базы данных (требуется админский токен)
       parameters:
@@ -604,7 +605,7 @@ paths:
       summary: Обновить бота
       tags:
       - bots
-  /api/v1/eff-runs:
+  /v1/eff-runs:
     post:
       consumes:
       - application/json
@@ -649,7 +650,7 @@ paths:
       summary: Создать запись о запуске
       tags:
       - eff_runs
-  /api/v1/logs:
+  /v1/logs:
     post:
       consumes:
       - application/json
@@ -688,7 +689,7 @@ paths:
       summary: Создать лог
       tags:
       - logs
-  /api/v1/owners:
+  /v1/owners:
     get:
       description: Возвращает список всех владельцев (требуется админский токен)
       produces:
@@ -763,7 +764,7 @@ paths:
       summary: Создать владельца
       tags:
       - owners
-  /api/v1/owners/{owner_id}:
+  /v1/owners/{owner_id}:
     delete:
       description: Полностью удаляет владельца из базы данных (требуется админский
         токен)
@@ -894,7 +895,7 @@ paths:
       summary: Обновить владельца
       tags:
       - owners
-  /api/v1/tokens:
+  /v1/tokens:
     post:
       consumes:
       - application/json
@@ -944,7 +945,7 @@ paths:
       summary: Создать новый токен
       tags:
       - tokens
-  /api/v1/tokens/{token_id}:
+  /v1/tokens/{token_id}:
     delete:
       description: Полностью удаляет токен из базы данных (требуется админский токен)
       parameters:
@@ -1030,7 +1031,7 @@ paths:
       summary: Обновить токен
       tags:
       - tokens
-  /api/v1/tokens/{token_id}/deactivate:
+  /v1/tokens/{token_id}/deactivate:
     patch:
       description: Деактивирует токен (мягкое удаление, токен перестаёт работать,
         требуется админский токен)
@@ -1072,7 +1073,6 @@ schemes:
 - https
 securityDefinitions:
   BearerAuth:
-    description: 'Введите токен в формате: Bearer {token}'
     in: header
     name: Authorization
     type: apiKey
