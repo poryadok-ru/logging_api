@@ -1,4 +1,4 @@
-basePath: /
+basePath: /logging
 definitions:
   auth_handler.CreateTokenRequest:
     properties:
@@ -370,7 +370,8 @@ definitions:
 host: api.automation.poryadok.ru
 info:
   contact: {}
-  description: API для управления логами ботов
+  description: 'API для управления логами ботов. Для авторизации используйте заголовок
+    Authorization: Bearer {token}.'
   title: Logging API
   version: "1.0"
 paths:
@@ -1072,7 +1073,6 @@ schemes:
 - https
 securityDefinitions:
   BearerAuth:
-    description: 'Введите токен в формате: Bearer {token}'
     in: header
     name: Authorization
     type: apiKey

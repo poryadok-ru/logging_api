@@ -28,15 +28,13 @@ import (
 
 // @title Logging API
 // @version 1.0
-// @description API для управления логами ботов
+// @description API для управления логами ботов. Для авторизации используйте заголовок Authorization: Bearer {token}.
 // @host api.automation.poryadok.ru
 // @BasePath /logging
-// @BasePath /
 // @schemes https
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
-// @description Введите токен в формате: Bearer {token}
 func main() {
 	config, err := configs.LoadConfig()
 	if err != nil {

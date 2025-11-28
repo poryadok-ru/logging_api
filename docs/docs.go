@@ -1552,7 +1552,6 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "BearerAuth": {
-            "description": "Введите токен в формате: Bearer {token}",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -1564,10 +1563,10 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "api.automation.poryadok.ru",
-	BasePath:         "/",
+	BasePath:         "/logging",
 	Schemes:          []string{"https"},
 	Title:            "Logging API",
-	Description:      "API для управления логами ботов",
+	Description:      "API для управления логами ботов. Для авторизации используйте заголовок Authorization: Bearer {token}.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
