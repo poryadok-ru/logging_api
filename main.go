@@ -28,8 +28,9 @@ import (
 
 // @title Logging API
 // @version 1.0
-// @description API для управления токенами и логами ботов
-// @host api.alexmayka.ru
+// @description API для управления логами ботов
+// @host api.automation.poryadok.ru
+// @BasePath /logging
 // @BasePath /
 // @schemes https
 // @securityDefinitions.apikey BearerAuth
