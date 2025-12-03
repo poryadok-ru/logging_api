@@ -55,7 +55,10 @@ func (m *AuthMiddleware) validateAndSetToken(c *gin.Context) (*authservice.Token
 	}
 
 	c.Set("token_id", tokenInfo.TokenID)
-	c.Set("bot_id", tokenInfo.BotID)
+	// Устанавливаем bot_id только если он не пустой (для админских токенов bot_id может быть пустым)
+	if tokenInfo.BotID != "" {
+		c.Set("bot_id", tokenInfo.BotID)
+	}
 	c.Set("is_admin", tokenInfo.IsAdmin)
 
 	return tokenInfo, true
@@ -94,8 +97,8 @@ func extractToken(c *gin.Context) string {
 		return ""
 	}
 
-	parts := strings.Split(bearerToken, " ")
-	if len(parts) == 2 && parts[0] == "Bearer" {
+	parts := strings.SplitN(bearerToken, " ", 2)
+	if len(parts) == 2 && strings.EqualFold(parts[0], "Bearer") {
 		return parts[1]
 	}
 
