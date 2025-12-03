@@ -10,6 +10,7 @@ import (
 	"logging_api/internal/handlers/owner_handler"
 	"logging_api/internal/middleware"
 
+	sentrygin "github.com/getsentry/sentry-go/gin"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -24,6 +25,11 @@ func SetupRoutes(
 	authMiddleware *middleware.AuthMiddleware,
 ) *gin.Engine {
 	router := gin.Default()
+
+	// Sentry middleware для отслеживания ошибок и запросов
+	router.Use(sentrygin.New(sentrygin.Options{
+		Repanic: true,
+	}))
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("/logging/swagger/doc.json")))
 

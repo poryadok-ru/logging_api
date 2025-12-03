@@ -59,7 +59,13 @@ func (h *LogHandler) CreateLog(c *gin.Context) {
 	}
 
 	botIDStr := botID.(string)
-	log, err := h.logService.CreateLog(&botIDStr, request.Status, request.Msg)
+
+	var botIDPtr *string
+	if botIDStr != "" {
+		botIDPtr = &botIDStr
+	}
+
+	log, err := h.logService.CreateLog(botIDPtr, request.Status, request.Msg)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
