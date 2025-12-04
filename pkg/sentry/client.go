@@ -48,32 +48,23 @@ func SendLog(botID string, projectCode string, botName string, status, msg strin
 		return
 	}
 
-	event := sentry.NewEvent()
-	event.Message = msg
-	event.Level = level
-	event.Timestamp = createdAt
+	sentry.WithScope(func(scope *sentry.Scope) {
+		scope.SetLevel(level)
 
-	event.Contexts = map[string]sentry.Context{
-		"log": {
+		scope.SetTag("project_code", projectCode)
+		scope.SetTag("bot_id", botID)
+		scope.SetTag("bot_name", botName)
+
+		scope.SetContext("log", map[string]interface{}{
 			"bot_id": botID,
 			"status": status,
-		},
-	}
+		})
+		scope.SetExtra("bot_id", botID)
+		scope.SetExtra("project_code", projectCode)
+		scope.SetExtra("bot_name", botName)
+		scope.SetExtra("log_status", status)
+		scope.SetExtra("created_at", createdAt.Format(time.RFC3339))
 
-	// Теги: только project_code, bot_id и bot_name
-	event.Tags = map[string]string{
-		"project_code": projectCode,
-		"bot_id":       botID,
-		"bot_name":     botName,
-	}
-
-	event.Extra = map[string]interface{}{
-		"bot_id":       botID,
-		"project_code": projectCode,
-		"bot_name":     botName,
-		"log_status":   status,
-		"created_at":   createdAt.Format(time.RFC3339),
-	}
-
-	sentry.CaptureEvent(event)
+		sentry.CaptureMessage(msg)
+	})
 }
