@@ -52,6 +52,9 @@ jobs:
             cat > .env << EOF
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             GIN_MODE=release
+            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+            SENTRY_ENVIRONMENT=${{ secrets.SENTRY_ENVIRONMENT }}
+            SENTRY_RELEASE=${{ secrets.SENTRY_RELEASE }}
             EOF
             
             # Загружаем Docker образ
