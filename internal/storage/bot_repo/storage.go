@@ -222,3 +222,27 @@ func (r *BotRepo) GetAllBots() ([]*models.Bot, error) {
 
 	return bots, nil
 }
+
+func (r *BotRepo) GetBotCodeByID(botID string) (string, error) {
+	query := `SELECT code FROM bots WHERE id = $1`
+
+	var code string
+	err := r.db.QueryRow(query, botID).Scan(&code)
+	if err != nil {
+		return "", err
+	}
+
+	return code, nil
+}
+
+// GetBotCodeAndNameByID получает code и name бота по его ID
+func (r *BotRepo) GetBotCodeAndNameByID(botID string) (code string, name string, err error) {
+	query := `SELECT code, name FROM bots WHERE id = $1`
+
+	err = r.db.QueryRow(query, botID).Scan(&code, &name)
+	if err != nil {
+		return "", "", err
+	}
+
+	return code, name, nil
+}

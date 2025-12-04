@@ -10,6 +10,13 @@ import (
 type Config struct {
 	Server   ServerConfig   `json:"server"`
 	Database DatabaseConfig `json:"database"`
+	Sentry   SentryConfig   `json:"sentry"`
+}
+
+type SentryConfig struct {
+	DSN         string
+	Environment string
+	Release     string
 }
 
 type ServerConfig struct {
@@ -40,6 +47,12 @@ func LoadConfig() (*Config, error) {
 	}
 
 	config.Database.Password = os.Getenv("DB_PASSWORD")
+	config.Sentry.DSN = os.Getenv("SENTRY_DSN")
+	config.Sentry.Environment = os.Getenv("SENTRY_ENVIRONMENT")
+	if config.Sentry.Environment == "" {
+		config.Sentry.Environment = "production"
+	}
+	config.Sentry.Release = os.Getenv("SENTRY_RELEASE")
 
 	return &config, nil
 }

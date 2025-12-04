@@ -24,6 +24,7 @@ import (
 	logrepo "logging_api/internal/storage/log_repo"
 	ownerrepo "logging_api/internal/storage/owner_repo"
 	"logging_api/pkg/postgres"
+	"logging_api/pkg/sentry"
 )
 
 // @title Logging API
@@ -40,6 +41,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to load config: %v", err)
 	}
+
+	defer sentry.InitSentry(&config.Sentry)()
 
 	db, err := postgres.Connect(
 		config.Database.Host,
@@ -65,7 +68,7 @@ func main() {
 	authService := authservice.NewAuthService(authRepo, botRepo)
 	botService := botservice.NewBotService(botRepo)
 	ownerService := ownerservice.NewOwnerService(ownerRepo)
-	logService := logservice.NewLogService(logRepo)
+	logService := logservice.NewLogService(logRepo, botRepo)
 	effRunService := effrunservice.NewEffRunService(effRunRepo)
 
 	authMiddleware := middleware.NewAuthMiddleware(authService)
