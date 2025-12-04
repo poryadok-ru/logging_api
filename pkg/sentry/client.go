@@ -1,6 +1,7 @@
 package sentry
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -48,6 +49,8 @@ func SendLog(botID string, projectCode string, botName string, status, msg strin
 		return
 	}
 
+	err := fmt.Errorf("%s", msg)
+
 	sentry.WithScope(func(scope *sentry.Scope) {
 		scope.SetLevel(level)
 
@@ -59,12 +62,15 @@ func SendLog(botID string, projectCode string, botName string, status, msg strin
 			"bot_id": botID,
 			"status": status,
 		})
+
+		// Дополнительная информация
 		scope.SetExtra("bot_id", botID)
 		scope.SetExtra("project_code", projectCode)
 		scope.SetExtra("bot_name", botName)
 		scope.SetExtra("log_status", status)
 		scope.SetExtra("created_at", createdAt.Format(time.RFC3339))
 
-		sentry.CaptureMessage(msg)
+		// Используем CaptureException для правильного отображения сообщения
+		sentry.CaptureException(err)
 	})
 }
